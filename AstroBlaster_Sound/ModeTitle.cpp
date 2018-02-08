@@ -61,6 +61,28 @@ void ModeTitle::Render(float dTime)
 	ResetStatesAfterSprites();
 	FX::SetupDirectionalLight(0, true, Vector3(-0.7f, -0.7f, 0.7f), Vector3(0.7f, 0.65f, 0.65f), Vector3(0.15f, 0.1f, 0.1f), Vector3(0.01f, 0.01f, 0.01f));
 
+	//get the player
+	Mesh *pSM = GetMeshManager()->GetMesh("player");
+	//make a model instance
+	Model ship;
+	//initialise it to the player mesh
+	ship.Initialise(*pSM);
+	//set position
+	ship.GetPosition() = Vector3(0, 0, 0);
+	float scale = 0.20;
+	ship.GetScale() = Vector3(scale, scale, scale);
+	//rotate and spin/
+	ship.GetRotation() = Vector3(-PI / 4, GetClock(), 0);
+
+	//render
+	FX::GetMyFX()->Render(ship, gd3dImmediateContext);
+
+
+
+
+
+
+
 
 	CommonStates state(gd3dDevice);
 	fx.mpSpriteB->Begin(SpriteSortMode_Deferred, state.NonPremultiplied());
